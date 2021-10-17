@@ -36,4 +36,18 @@ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --bui
 
 docker-compose down
 
+## Docker Commands
+
 docker volume prune
+
+## Docker Hub
+
+from vs you can login in powershell > docker login
+also you can use vs code extension to access registry
+
+tag image:
+right click container > shoppingclient:latest > tag > jpcassidy/shoppingapp:latest
+
+push image:
+docker push jpcassidy/shoppingapp:latest
+or > right click image > push
