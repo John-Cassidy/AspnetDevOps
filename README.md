@@ -51,3 +51,12 @@ right click container > shoppingclient:latest > tag > jpcassidy/shoppingapp:late
 push image:
 docker push jpcassidy/shoppingapp:latest
 or > right click image > push
+
+## Azure
+
+Shopping.Client
+
+Resource Group - shoppingapp
+
+App - shoppingappclient.azurewebsites.net
+
