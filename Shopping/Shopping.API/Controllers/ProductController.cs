@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shopping.API.Data;
 using Shopping.API.Models;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,7 @@ namespace Shopping.API.Controllers {
 
         [HttpGet]
         public async Task<IEnumerable<Product>> Get() {
-            var rng = new Range();
-            return Enumerable.Range(1, 5).Select(index => new Product {
-                Name = "asd"
-            }).ToArray();
+            return ProductContext.Products;
         }
     }
 }
