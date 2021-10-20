@@ -60,3 +60,20 @@ Resource Group - shoppingapp
 
 App - shoppingappclient.azurewebsites.net
 
+## Mongo
+
+pull mongo db from hub.docker.com/\_/mongo
+
+> docker pull mongo
+
+run mongo
+
+> docker run -d -p 27017:27017 --name shopping-mongo mongo
+
+logs
+
+> docker logs -f shopping-mongo
+
+execute interactive
+
+> docker exec -it shopping-mongo /bin/bash
