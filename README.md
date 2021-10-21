@@ -77,3 +77,11 @@ logs
 execute interactive
 
 > docker exec -it shopping-mongo /bin/bash
+> ls > show list of files/folders
+> mongo > start mongo cmd
+> show dbs > list of databases > show databases
+> use CatalogDb > create and switch to CatalogDb
+> db.createCollection('Products')
+> db.Products.insertMany([{'Name': 'Asus Laptop','Category': 'Computers', 'Summary': 'Summary', 'Description': 'Description', 'ImageFile': 'ImageFile', 'Price':1999.99 }, {'Name': 'HP Laptop','Category': 'Computers', 'Summary': 'Summary', 'Description': 'Description', 'ImageFile': 'ImageFile', 'Price':1205.99 }])
+> db.Products.find({}).pretty() > get all
+> db.Products.remove({}) > remove all
