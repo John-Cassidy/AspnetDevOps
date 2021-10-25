@@ -244,7 +244,7 @@ kubectl get replicaset
 
 ---
 
-section 8: create kubernetes local environment:
+## section 8: create kubernetes local environment:
 
 - Shopping.API yaml
 - Shopping.Client yaml
@@ -253,3 +253,18 @@ section 8: create kubernetes local environment:
 - service yaml file
 - config map
 - secret definitions - storing database connection definitions
+
+1 create mongo.yaml
+2 create mongo-secret.yaml
+2a base64 the secrets: https://www.base64encode.org/
+
+> username=username=dXNlcm5hbWU=
+> password=password=cGFzc3dvcmQ=
+
+2b apply mongo-secret.yaml > kubectl apply -f .\k8s\mongo-secret.yaml
+3 update secrects in mongo.yaml
+3a apply mongo.yaml > kubectl apply -f .\k8s\mongo.yaml
+
+> kubectl get pod --watch
+> kubectl get all
+> copy pod name and run: kubectl describe pod [pod name]
