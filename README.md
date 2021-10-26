@@ -268,3 +268,20 @@ kubectl get replicaset
 > kubectl get pod --watch
 > kubectl get all
 > copy pod name and run: kubectl describe pod [pod name]
+
+## section 8: Build Shopping Docker Images, Tag and Push to Docker Hub
+
+1 build images and test containers
+
+> docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up --build
+> docker-compose down
+
+2 tag images
+
+> docker tag [Image Id] jpcassidy/shoppingclient - docker tag 1fb85abeee0f jpcassidy/shoppingclient
+> docker tag [Image Id] jpcassidy/shoppingapi
+> docker tag [Image Id] jpcassidy/mongodb
+
+3 push images to Docker Hub
+
+> docker push blah
