@@ -287,3 +287,20 @@ kubectl get replicaset
 
 > docker push jpcassidy/shoppingclient
 > docker push jpcassidy/shoppingapi
+
+## section 8: create Shopping.API yaml
+
+1 create Shopping.API yaml
+1a test Shopping.API yaml
+
+> kubectl apply -f .\k8s\mongo-secret.yaml
+> kubectl apply -f .\k8s\mongo.yaml
+> kubectl apply -f .\k8s\shoppingapi.yaml
+> kubectl get all
+
+2 update connectionstring
+2a create mongo-configmap.yaml
+2b test
+
+> kubectl apply -f .\k8s\mongo-configmap.yaml
+> kubectl apply -f .\k8s\shoppingapi.yaml
