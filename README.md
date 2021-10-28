@@ -315,3 +315,13 @@ kubectl get replicaset
 
 > kubectl apply -f .\k8s\shoppingapi-configmap.yaml
 > kubectl apply -f .\k8s\shoppingclient.yaml
+
+## section 8: clear and create all k8s resources on local cluster
+
+1 clear all resources
+
+> kubectl delete -f .\k8s\
+
+2 apploy all resources
+
+> kubectl apply -f .\k8s\
