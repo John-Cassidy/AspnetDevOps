@@ -185,19 +185,20 @@ Create Service on Kubernetes
 
 nginx-service.yaml
 
-```
+---
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+name: nginx-service
 spec:
-  selector:
-    app: nginx
-  ports:
-    - portocol: TCP
-      port: 80
-      targetPort: 8080
-```
+selector:
+app: nginx
+ports: - portocol: TCP
+port: 80
+targetPort: 8080
+
+---
 
 kubectl apply -f .\nginx-service.yaml
 
@@ -244,7 +245,7 @@ kubectl get replicaset
 
 ---
 
-## section 8: create kubernetes local environment:
+## section 8: create kubernetes local environment
 
 - Shopping.API yaml
 - Shopping.Client yaml
@@ -278,10 +279,11 @@ kubectl get replicaset
 
 2 tag images
 
-> docker tag [Image Id] jpcassidy/shoppingclient - docker tag 1fb85abeee0f jpcassidy/shoppingclient
+> docker tag [Image Id] jpcassidy/shoppingclient
 > docker tag [Image Id] jpcassidy/shoppingapi
 > docker tag [Image Id] jpcassidy/mongodb
 
 3 push images to Docker Hub
 
-> docker push blah
+> docker push jpcassidy/shoppingclient
+> docker push jpcassidy/shoppingapi
