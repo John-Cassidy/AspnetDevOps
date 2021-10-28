@@ -304,3 +304,14 @@ kubectl get replicaset
 
 > kubectl apply -f .\k8s\mongo-configmap.yaml
 > kubectl apply -f .\k8s\shoppingapi.yaml
+
+## section 8: create Shopping.Client yaml
+
+1 create Shopping.Client yaml
+
+2 create shoppingapi-config.yaml
+
+3 test Shopping.Client yaml
+
+> kubectl apply -f .\k8s\shoppingapi-configmap.yaml
+> kubectl apply -f .\k8s\shoppingclient.yaml
