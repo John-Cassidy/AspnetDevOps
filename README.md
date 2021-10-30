@@ -328,7 +328,7 @@ kubectl get replicaset
 
 > kubectl delete -f .\k8s\
 
-2 apploy all resources
+2 apply all resources
 
 > kubectl apply -f .\k8s\
 
@@ -394,3 +394,54 @@ az aks install-cli
 Connect to cluster using kubectl
 az aks get-credentials --resource-group aspnetDevOps --name aspnetDevOpsAKSCluster
 Merged "aspnetDevOpsAKSCluster" as current context in C:\Users\jpcas\.kube\config
+
+Create PULL Secret
+
+> kubectl create secret docker-registry acr-secret --docker-server=aspnetdevopsshoppingacr.azurecr.io --docker-username=[uername] --docker-password=[password] --docker-email=[email]
+
+Create all aks yaml files
+
+Confirm connected to AKS from command line
+
+> kubectl config get-contexts
+
+```text
+CURRENT   NAME                     CLUSTER                  AUTHINFO                                          NAMESPACE
+
+*         aspnetDevOpsAKSCluster   aspnetDevOpsAKSCluster   clusterUser_aspnetDevOps_aspnetDevOpsAKSCluster
+          docker-desktop           docker-desktop           docker-desktop
+```
+
+kubectl config current-context
+aspnetDevOpsAKSCluster
+
+#### Deploy microservices to AKS
+
+> kubectl apply -f .\aks\
+
+configmap/mongo-configmap created
+secret/mongo-secret created
+deployment.apps/mongo-deployment created
+service/mongo-service created
+configmap/shoppingapi-configmap created
+deployment.apps/shoppingapi-deployment created
+service/shoppingapi-service created
+deployment.apps/shoppingclient-deployment created
+service/shoppingclient-service created
+
+> kubectl get all
+
+Get API from service/shoppingclient-service
+Open in browser
+
+#### Debug Errors
+
+Get Pod
+
+> kubectl get pod
+
+Copy Name
+
+> kubectl describe pod [podname]
+
+Review Event list and read Message for each event
