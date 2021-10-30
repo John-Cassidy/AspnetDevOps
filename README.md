@@ -101,6 +101,12 @@ Login - localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kub
 kubectl
 see organized commands
 
+cluster commands:
+what clusters are available: kubectl config get-contexts
+what is current cluster: kubectl config current-context
+switch cluster context: kubectl config user-context -h
+
+general commands:
 kubectl --help
 kubectl version
 kubectl cluster-info
@@ -325,3 +331,66 @@ kubectl get replicaset
 2 apploy all resources
 
 > kubectl apply -f .\k8s\
+
+## Section 9: Azure cli, AKS
+
+Steps
+
+1 docker build/push to Docker Registry (Docker Hub, ACR)
+2 create deploy to cluster: Azure cli (kubectl create -f app-deploy.yaml)
+3 configure external access (Azure Load Balancer)
+
+### Azure cli commands
+
+az version
+
+az login
+
+Create a resource group
+az group create --name aspnetDevOps --location eastus
+
+Create an Azure Container Registry
+az acr create --resource-group aspnetDevOps --name aspnetdevopsshoppingacr --sku Basic
+
+Enable Admin Account for ACR Pull
+az acr update -n aspnetdevopsshoppingacr --admin-enabled true
+
+Log in to the container registry
+az acr login --name aspnetdevopsshoppingacr
+
+### Tag a container image
+
+get the login server address
+az acr list --resource-group aspnetDevOps --query "[].{acrLoginServer:loginServer}" --output table
+aspnetdevopsshoppingacr.azurecr.io
+
+Tag your images
+
+docker tag shoppingapi:latest aspnetdevopsshoppingacr.azurecr.io/shoppingapi:v1
+docker tag shoppingclient:latest aspnetdevopsshoppingacr.azurecr.io/shoppingclient:v1
+
+Push images to registry
+
+docker push aspnetdevopsshoppingacr.azurecr.io/shoppingapi:v1
+docker push aspnetdevopsshoppingacr.azurecr.io/shoppingclient:v1
+
+List images in registry
+az acr repository list --name aspnetdevopsshoppingacr --output table
+
+See tags
+az acr repository show-tags --name aspnetdevopsshoppingacr --repository shoppingapi --output table
+az acr repository show-tags --name aspnetdevopsshoppingacr --repository shoppingclient --output table
+
+### AKS Cluster
+
+Create AKS cluster with attaching ACR
+az aks create --resource-group aspnetDevOps --name aspnetDevOpsAKSCluster --node-count 1 --generate-ssh-keys --attach-acr aspnetdevopsshoppingacr
+
+### az aks cli
+
+Install the Kubernetes CLI
+az aks install-cli
+
+Connect to cluster using kubectl
+az aks get-credentials --resource-group aspnetDevOps --name aspnetDevOpsAKSCluster
+Merged "aspnetDevOpsAKSCluster" as current context in C:\Users\jpcas\.kube\config
