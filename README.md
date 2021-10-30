@@ -480,3 +480,26 @@ Check
 
 > kubectl get all
 > kubectl get hpa
+
+#### Update AKS Deployment with Zero Downtime
+
+Update Client
+Remove Client docker images
+
+> docker rmi 1b4422698bb8 -f
+
+Rebuild image, test and tag
+
+> cd .\Shopping\
+> docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
+> docker tag shoppingclient:latest aspnetdevopsshoppingacr.azurecr.io/shoppingclient:v2
+
+Push images to registry
+
+docker push aspnetdevopsshoppingacr.azurecr.io/shoppingclient:v2
+
+List image in registry
+az acr repository list --name aspnetdevopsshoppingacr --output table
+
+See tag
+az acr repository show-tags --name aspnetdevopsshoppingacr --repository shoppingclient --output table
