@@ -445,3 +445,38 @@ Copy Name
 > kubectl describe pod [podname]
 
 Review Event list and read Message for each event
+
+#### Scale Pods
+
+##### Manually
+
+> kubectl get pod
+> kubectl get deployment
+
+Scale up to 3 pods
+
+> kubectl scale --replicas=3 deployment.apps/shoppingclient-deployment
+
+##### update pod Yaml file
+
+update shoppingclient.yaml
+
+> replicas: 2
+
+##### create autoscale Yaml file
+
+Check kubernetes version to confirm it allows autoscaling
+
+> az aks show --resource-group aspnetDevOps --name aspnetDevOpsAKSCluster --query kubernetesVersion --output table
+
+1.20.9
+
+Create shoppingautoscale.yaml
+Apply
+
+> kubectl apply -f .\aks\
+
+Check
+
+> kubectl get all
+> kubectl get hpa
