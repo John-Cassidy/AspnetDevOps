@@ -505,8 +505,11 @@ See tag
 az acr repository show-tags --name aspnetdevopsshoppingacr --repository shoppingclient --output table
 
 Apply
+
 > kubectl apply -f .\aks\
 
 #### Clean All AKS and Azure Resources
 
 az group delete --name myResourceGroup --yes --no-wait
+
+### Pipelines
