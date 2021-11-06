@@ -2,6 +2,8 @@
 
 Deploying .Net Microservices with K8s, AKS and Azure DevOps
 
+[![Build Status](https://dev.azure.com/jpcassidy/shopping/_apis/build/status/shoppingclient-pipeline?branchName=main)](https://dev.azure.com/jpcassidy/shopping/_build/latest?definitionId=23&branchName=main)
+
 ## deploy .net microservices with k8s, aks and azure devops
 
 ### prerequisites and source code
