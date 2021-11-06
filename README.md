@@ -2,10 +2,6 @@
 
 Deploying .Net Microservices with K8s, AKS and Azure DevOps
 
-Client: [![Client Build Status](https://dev.azure.com/jpcassidy/shopping/_apis/build/status/shoppingclient-pipeline?branchName=main)](https://dev.azure.com/jpcassidy/shopping/_build/latest?definitionId=23&branchName=main)
-
-API: [![API Build Status](https://dev.azure.com/jpcassidy/shopping/_apis/build/status/shoppingapi-pipeline?branchName=main)](https://dev.azure.com/jpcassidy/shopping/_build/latest?definitionId=22&branchName=main)
-
 ## deploy .net microservices with k8s, aks and azure devops
 
 ### prerequisites and source code
@@ -108,7 +104,7 @@ see organized commands
 cluster commands:
 what clusters are available: kubectl config get-contexts
 what is current cluster: kubectl config current-context
-switch cluster context: kubectl config user-context -h
+switch cluster context: kubectl config use-context --help
 
 general commands:
 kubectl --help
@@ -517,3 +513,31 @@ Apply
 az group delete --name myResourceGroup --yes --no-wait
 
 ### Pipelines
+
+Create pipelines
+
+### Clean All AKS and Azure Resources again
+
+See all resources
+
+> kubectl get all
+
+Delete all resources
+
+> kubectl delete -f .\aks\
+
+Delete all Azure resources
+
+> az group delete --name aspnetDevOps --yes --no-wait
+
+#### kubectl clean up (users, contexts, clusters)
+
+> kubectl config get-contexts
+> kubectl config view
+
+switch context command:
+
+> kubectl config use-context docker-desktop
+> kubectl config delete-cluster aspnetDevOpsAKSCluster
+> kubectl config delete-context aspnetDevOpsAKSCluster
+> kubectl config delete-user clusterUser_aspnetDevOps_aspnetDevOpsAKSCluster
