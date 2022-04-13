@@ -28,6 +28,13 @@ Azure DevOps Account for ci/cd devops pipelines
 
 ## Docker Compose
 
+NOTE: REBUILD IMAGES TO INCLUDE CODE CHANGES AND START
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build
+NOTE: START CONTAINERS FROM EXISTING IMAGES WITHOUT REBUILDING
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+NOTE: STOP RUNNING CONTAINERS AND REMOVE CONTAINERS
+docker-compose -f docker-compose.yml -f docker-compose.override.yml down
+
 NO CHANGES TO CODE USE -d
 docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
 
