@@ -129,6 +129,10 @@ Get the Bearer Token
 
 Copy token and use it to log into kubernetes-dashboard
 
+Alternate way to get Bearer Token
+
+> kubectl describe secret -n kube-system
+
 #### Disabling the login promtp in Kubernetes Dashboard
 
 You can override the login page by running following command:
@@ -226,6 +230,9 @@ kubectl get pod
 kubectl get replicaset
 kubectl get all
 
+kubectl edit deployment nginx-depl
+kubectl delete deployment nginx-depl
+
 ---
 
 yaml file has 3 parts
@@ -245,7 +252,7 @@ Declarative Commands
 
 create a nginx-depl.yaml file
 
-kubectl apply -f .\nginx-deply.yaml
+kubectl apply -f .\nginx-depl.yaml
 see deployment by running: kubectl get all:
 
 - pod
@@ -254,7 +261,9 @@ see deployment by running: kubectl get all:
 
 kubectl create -f
 kubectl edit -f
-kubctl delete -f
+kubectl delete -f
+
+kubectl delete -f .\nginx-depl.yaml
 
 ---
 
@@ -266,6 +275,8 @@ Historical info of pod: kubectl describe
 Create Service on Kubernetes
 
 nginx-service.yaml
+
+kubectl apply -f .\nginx-service.yaml
 
 ---
 
