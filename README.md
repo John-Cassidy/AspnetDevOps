@@ -2,6 +2,9 @@
 
 Deploying .Net Microservices with K8s, AKS and Azure DevOps
 
+Article with instructions for creating 3 container application and deploy to AKS on Azure:
+[Preparing Multi-Container Microservices Applications for Deployment](https://medium.com/aspnetrun/preparing-multi-container-microservices-applications-for-deployment-793d60f48d31)
+
 ## deploy .net microservices with k8s, aks and azure devops
 
 ### prerequisites and source code
@@ -97,11 +100,76 @@ execute interactive
 
 ### Setup Dashboard
 
-Instructions - https://andrewlock.net/running-kubernetes-and-the-dashboard-with-docker-desktop/
+Running Kubernetes Dashboard - instructions provided by Andre Lock
+[https://andrewlock.net/running-kubernetes-and-the-dashboard-with-docker-desktop/](https://andrewlock.net/running-kubernetes-and-the-dashboard-with-docker-desktop/)
 
-start Kubernetes Dashboard - kubectl proxy
+To install the Kubernetes Dashboard, open terminal and run following:
 
-Login - localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/login
+> kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+
+Start Kubernetes Dashboard > kubectl proxy
+
+Login > http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+#### Setup Login User w/token
+
+Create a user to log into Kubernetes Dashboard > https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
+Instructions for creating a sample user
+https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+
+> create dashboard-adminuser.yaml
+> kubectl apply -f dashboard-adminuser.yaml
+> create dashboard-cluster-admin-role.yaml
+> kubectl apply -f dashboard-cluster-admin-role.yaml
+
+Get the Bearer Token
+
+> kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
+
+Copy token and use it to log into kubernetes-dashboard
+
+#### Disabling the login promtp in Kubernetes Dashboard
+
+You can override the login page by running following command:
+
+```powershell
+
+kubectl patch deployment kubernetes-dashboard -n kubernetes-dashboard --type 'json' -p '[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--enable-skip-login"}]'
+
+```
+
+If you want to make this change manually, run the following, which opens notepad.exe:
+
+```powershell
+kubectl edit deployment kubernetes-dashboard -n kubernetes-dashboard
+```
+
+Add the --enable-skip-login argument, as shown here:
+
+```yaml
+spec:
+  template:
+    spec:
+      containers:
+        - args:
+            - --auto-generate-certificates
+            - --namespace=kubernetes-dashboard
+            - --enable-skip-login # add this argument
+          image: kubernetesui/dashboard:v2.5.0
+```
+
+#### Setup Metrics Server
+
+[GitHub Releases](https://github.com/kubernetes-sigs/metrics-server/releases)
+
+Run the following command to download the Metrics Server manifests and install them in your cluster:
+
+> kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.1/components.yaml
+
+Patch one of the deployments - add the --kubelet-insecure-tls argument to the metrics-server deployment, otherwise you'll see an error saying something like unable to fetch metrics from node docker-desktop. The following command patches the deployment:
+
+> kubectl patch deployment metrics-server -n kube-system --type 'json' -p '[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--kubelet-insecure-tls"}]'
 
 ### Commands
 
@@ -126,13 +194,14 @@ kubectl get all -- pods, services, deployments..
 ---
 
 Imperative - Declarative
-Imperative Commands
+Imperative Commands -- create and run resources
 
 kubectl run [container_name] --image=[image_name]
 kubectl port-forward [pod] [ports]
 
+Declarative Commands -- create or modify resources
 kubectl create [resource]
-kubectl apply [resource] -- create or modify resources
+kubectl apply [resource]
 
 ---
 
