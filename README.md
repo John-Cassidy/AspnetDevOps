@@ -107,7 +107,9 @@ To install the Kubernetes Dashboard, open terminal and run following:
 
 > kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
 
-Start Kubernetes Dashboard > kubectl proxy
+#### Start/Login Kubernetes Dashboard
+
+> kubectl proxy
 
 Login > http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
@@ -356,6 +358,7 @@ kubectl get replicaset
 > password=password=cGFzc3dvcmQ=
 
 2b apply mongo-secret.yaml > kubectl apply -f .\k8s\mongo-secret.yaml
+2c check secret applied successfully > kubectl get secret
 3 update secrects in mongo.yaml
 3a apply mongo.yaml > kubectl apply -f .\k8s\mongo.yaml
 
@@ -373,7 +376,9 @@ kubectl get replicaset
 2 tag images
 
 > docker tag [Image Id] jpcassidy/shoppingclient
+> docker tag b644e980 jpcassidy/shoppingclient
 > docker tag [Image Id] jpcassidy/shoppingapi
+> docker tag 4ab0531 jpcassidy/shoppingapi
 > docker tag [Image Id] jpcassidy/mongodb
 
 3 push images to Docker Hub
@@ -393,7 +398,7 @@ kubectl get replicaset
 
 2 update connectionstring
 2a create mongo-configmap.yaml
-2b test
+2b test > kubectl get cm
 
 > kubectl apply -f .\k8s\mongo-configmap.yaml
 > kubectl apply -f .\k8s\shoppingapi.yaml
@@ -402,7 +407,8 @@ kubectl get replicaset
 
 1 create Shopping.Client yaml
 
-2 create shoppingapi-config.yaml
+2a create shoppingapi-config.yaml
+2b test > kubectl get cm
 
 3 test Shopping.Client yaml
 
