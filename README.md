@@ -505,8 +505,14 @@ CURRENT   NAME                     CLUSTER                  AUTHINFO            
           docker-desktop           docker-desktop           docker-desktop
 ```
 
-kubectl config current-context
-aspnetDevOpsAKSCluster
+check current context
+
+> kubectl config current-context
+> aspnetDevOpsAKSCluster
+
+change context
+
+> kubectl config use-context docker-desktop
 
 #### Deploy microservices to AKS
 

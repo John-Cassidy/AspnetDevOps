@@ -29,7 +29,19 @@ az version
   "extensions": {}
 }
 --
+
 az login
+
+Please try below steps:
+
+login to Azure Portal and switch to the directory you want to access by using Az Login cmd.
+
+Navigate to the subscription blade and make sure the user has at least read permission to the subscription.
+
+Run az login --tenant your_tenant.onmicrosoft.com command and you should no longer encounter The following tenants don't contain accessible subscriptions. Use 'az login --allow-no-subscriptions' to have tenant level access. message.
+
+Note: The above steps are for standard Azure AD tenant and not for B2C tenant, because in case of B2C tenant, subscription is linked to the B2C service and not to the tenant. In B2C tenant, you must use --allow-no-subscriptions switch.
+
 --
 Create a resource group
 az group create --name myResourceGroup --location westeurope
