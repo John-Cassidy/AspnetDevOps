@@ -357,6 +357,11 @@ kubectl get replicaset
 > username=username=dXNlcm5hbWU=
 > password=password=cGFzc3dvcmQ=
 
+NOTE: you can also run the following command in wsl to generate the base64 encrypted secret:
+
+> echo -n 'username' | base64
+> echo -n 'password' | base64
+
 2b apply mongo-secret.yaml > kubectl apply -f .\k8s\mongo-secret.yaml
 2c check secret applied successfully > kubectl get secret
 3 update secrects in mongo.yaml
