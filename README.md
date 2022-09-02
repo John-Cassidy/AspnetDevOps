@@ -98,6 +98,8 @@ execute interactive
 
 ## Kubernetes
 
+[Kubernetes Cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
 ### Setup Dashboard
 
 Running Kubernetes Dashboard - instructions provided by Andre Lock
@@ -196,6 +198,9 @@ kubectl get pod
 kubectl get services
 kubectl get all
 kubectl get all -- pods, services, deployments..
+
+kubectl get pods --all-namespaces
+kubectl get pods -o wide
 
 ---
 
