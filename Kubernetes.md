@@ -11,11 +11,11 @@ Running Kubernetes Dashboard - instructions provided by Andre Lock
 
 To install the Kubernetes Dashboard, open terminal and run following:
 
-> kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+- kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
 
 #### Start/Login Kubernetes Dashboard
 
-> kubectl proxy
+- kubectl proxy
 
 Login > http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
@@ -26,20 +26,20 @@ Create a user to log into Kubernetes Dashboard > https://kubernetes.io/docs/task
 Instructions for creating a sample user
 https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
 
-> create dashboard-adminuser.yaml
-> kubectl apply -f dashboard-adminuser.yaml
-> create dashboard-cluster-admin-role.yaml
-> kubectl apply -f dashboard-cluster-admin-role.yaml
+- create dashboard-adminuser.yaml
+- kubectl apply -f dashboard-adminuser.yaml
+- create dashboard-cluster-admin-role.yaml
+- kubectl apply -f dashboard-cluster-admin-role.yaml
 
 Get the Bearer Token
 
-> kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
+- kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
 
 Copy token and use it to log into kubernetes-dashboard
 
 Alternate way to get Bearer Token
 
-> kubectl describe secret -n kube-system
+- kubectl describe secret -n kube-system
 
 ### Commands
 
